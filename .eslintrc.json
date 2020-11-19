@@ -1,0 +1,63 @@
+{
+    "env": {
+        "es2020": true,
+        "node": true
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    "error",
+                    "never",
+                    {
+                        "ts": "never",
+                        "js": "never"
+                    }
+                ],
+                "moduleDirectory": [
+                    "node_modules",
+                    "src/"
+                ]
+            }
+        }
+    },
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "prettier/@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "import/prefer-default-export": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "max-len": [
+            1,
+            160,
+            2
+        ],
+        "no-restricted-syntax": "warn",
+        "class-methods-use-this": "warn",
+        "@typescript-eslint/no-var-requires": "warn",
+        "no-param-reassign": "warn",
+        "@typescript-eslint/ban-types": "warn",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "**/*.test.ts"
+                ]
+            }
+        ]
+    }
+}

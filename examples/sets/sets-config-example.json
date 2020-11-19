@@ -1,0 +1,66 @@
+{
+  "sets": [
+    {
+      "collectionName": "pc-sets-store-example",
+      "scriptsPath": "examples/scripts",
+      "template":{
+        "preRequestTemplateFilePath":"examples/scripts/template/pre-request.template"
+      },
+      "auth": {
+        "type":"basic",
+        "forced":false,
+        "basic": {
+          "username": "user",
+          "password": "user-password"
+        }
+      },
+      "order": [
+        {
+          "method": "post",
+          "path": "store/order"
+        },
+        {
+          "method": "get",
+          "path": "store/order/:orderId"
+        },
+        {
+          "method": "get",
+          "path": "store/inventory"
+        }
+      ]
+    },
+    {
+      "collectionName": "pc-sets-pet-example",
+      "auth": {
+        "type":"apikey",
+        "apikey": {
+          "location": "header",
+          "key": "x-my-key",
+          "value": "key-123"
+        }
+      },
+      "order": [
+        {
+          "method": "get",
+          "path": "pet/findByStatus"
+        },
+        {
+          "method": "put",
+          "path": "pet"
+        },
+        {
+          "method": "get",
+          "path": "pet/findByTags"
+        },
+        {
+          "method": "delete",
+          "path": "pet/:petId"
+        },
+        {
+          "method": "post",
+          "path": "pet"
+        }
+      ]
+    }
+  ]
+}

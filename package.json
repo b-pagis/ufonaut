@@ -1,0 +1,102 @@
+{
+  "name": "@b-pagis/ufonaut",
+  "author": "b-pagis",
+  "license": "ISC",
+  "version": "1.0.0",
+  "description": "CLI for converting open api documentation to postman collection with additional options for integration testing",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "engines": {
+    "node": ">=12.19",
+    "npm": ">=6"
+  },
+  "bin": {
+    "ufonaut": "bin/launcher"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b-pagis/ufonaut.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b-pagis/ufonaut/issues"
+  },
+  "homepage": "https://github.com/b-pagis/ufonaut#readme",
+  "keywords": [
+    "postman",
+    "integration",
+    "testing",
+    "cli",
+    "command-line",
+    "test",
+    "util",
+    "utility",
+    "helper",
+    "ufonaut",
+    "openapi",
+    "open-api",
+    "rest"
+  ],
+  "scripts": {
+    "run": "node lib/index.js",
+    "start": "npm run build && node lib/index.js",
+    "test": "jest --verbose",
+    "coverage": "jest --coverage",
+    "lint": "eslint . --ext .ts",
+    "build": "npm run clean:lib && tsc -p tsconfig.prod.json",
+    "clean:lib": "rm -rf ./lib",
+    "clean:all": "rm -rf ./node_modules ./package-lock.json ./lib",
+    "refresh": "npm run clean:all && npm i",
+    "pack": "npm run build && tar tvf $(npm pack)",
+    "prepare-release": "standard-version",
+    "release": "gh release create $(git describe --tags --abbrev=0) -F ./release-notes.md"
+  },
+  "devDependencies": {
+    "@liftr/tscov": "^1.4.6",
+    "@types/figlet": "^1.2.0",
+    "@types/inquirer": "^6.5.0",
+    "@types/jest": "^26.0.3",
+    "@types/node": "^14.0.5",
+    "@types/postman-collection": "^3.5.3",
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "commitizen": "^4.2.0",
+    "cz-conventional-changelog": "^3.2.1",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.1.0",
+    "only": "0.0.2",
+    "standard-version": "^9.0.0",
+    "ts-jest": "^26.1.1",
+    "ts-node": "^8.10.1",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "commander": "^6.0.0",
+    "figlet": "^1.4.0",
+    "inquirer": "^7.3.0",
+    "kleur": "^4.1.3",
+    "openapi-to-postmanv2": "^2.0.0",
+    "postman-collection": "3.5.5",
+    "tslib": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "standard-version": {
+    "scripts": {
+      "postchangelog": "sed -ri \"s/(const version = ')[^']*/\\1$(cat package.json | grep '\\\"version\\\"' | cut -d \":\" -f 2 | sed -e \"s/[\\\",\\, ]//g\")/\" src/index.ts"
+    },
+    "skip": {
+      "commit": true
+    }
+  }
+}

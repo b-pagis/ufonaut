@@ -1,0 +1,5 @@
+var requestBody = <%%=requestBody=%%>;
+
+<%%=  scriptContent =%%>
+
+pm.environment.set('requestBody', JSON.stringify(requestBody));

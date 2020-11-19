@@ -1,0 +1,16 @@
+{
+  "order": [
+    {
+      "method": "post",
+      "path": "user"
+    },
+    {
+      "method": "post",
+      "path": "store/order"
+    },
+    {
+      "method": "get",
+      "path": "pet/findByStatus"
+    }
+  ]
+}
