@@ -1,7 +1,7 @@
 import {
   Collection, Item, Event, EventDefinition, Script, RequestAuthDefinition, RequestAuth,
 } from 'postman-collection';
-import { LettersOnlyWithDash } from '../utils/string.util';
+import { LettersNumbersWithDash } from '../utils/string.util';
 import {
   EndpointInfo, OrderList, PreRequestTestScript, CollectionAuth,
 } from '../converter/converter.model';
@@ -16,7 +16,7 @@ import { Interpolate } from '../template/template';
  * @returns {string} normalized HTTP method and path to resource combination
  */
 function getNormalizedEndpointName(method: string, path: string): string {
-  return `${method}-${LettersOnlyWithDash(path)}`.toLocaleLowerCase();
+  return `${method}-${LettersNumbersWithDash(path)}`.toLocaleLowerCase();
 }
 
 /**

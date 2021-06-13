@@ -9,7 +9,7 @@ const commandOptions: ExecutableCommandOptions = {
   isDefault: true,
 };
 
-const version = '1.0.0';
+const version = '1.0.1';
 
 const program = new Command();
 program.version(version);
@@ -48,7 +48,7 @@ program
       outputPath: options.output,
       scriptsCatalogLocation: options.scripts,
       orderConfigFileLocation: options.order,
-      collectionName: options.name,
+      collectionName: options.rename,
       authHeaderBasicAuthUsername: options.username,
       authHeaderBasicAuthPassword: options.password,
       authHeaderXApiKey: options.xApiKey,
@@ -61,7 +61,7 @@ program
       collectionApiKeyAuthLocation: options.collectionApiKeyAuthLocation,
       collectionBearerAuthToken: options.collectionBearerAuthToken,
       collectionForcedAuth: options.collectionForcedAuth,
-      collectionPreRequestScriptTemplateLocation: options.scriptTemplateLocation,
+      collectionPreRequestScriptTemplateLocation: options.scriptTemplate,
     };
     ExecuteConvertWrite(executorOptions);
   });
