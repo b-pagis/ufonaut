@@ -64,9 +64,9 @@
     "@typescript-eslint/parser": "^3.5.0",
     "commitizen": "^4.2.0",
     "cz-conventional-changelog": "^3.2.1",
-    "eslint": "^7.4.0",
+    "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.0",
     "jest": "^26.1.0",
     "only": "0.0.2",
@@ -77,14 +77,14 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
-    "axios": "^0.21.0",
-    "commander": "^7.0.0",
+    "axios": "^0.21.1",
+    "commander": "^7.2.0",
     "figlet": "^1.4.0",
-    "inquirer": "^8.0.0",
-    "kleur": "^4.1.3",
-    "openapi-to-postmanv2": "^2.0.0",
-    "postman-collection": "3.6.11",
-    "tslib": "^2.0.0"
+    "inquirer": "^8.1.0",
+    "kleur": "^4.1.4",
+    "openapi-to-postmanv2": "^2.7.0",
+    "postman-collection": "^3.6.11",
+    "tslib": "^2.3.0"
   },
   "config": {
     "commitizen": {
