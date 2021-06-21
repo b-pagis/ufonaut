@@ -52,7 +52,7 @@
     "refresh": "npm run clean:all && npm i",
     "pack": "npm run build && tar tvf $(npm pack)",
     "prepare-release": "standard-version",
-    "release": "gh release create $(git describe --tags --abbrev=0) -F ./release-notes.md"
+    "release": "gh release create $(git describe --tags --abbrev=0) -F ./release-notes.md -t $(git describe --tags --abbrev=0) -d"
   },
   "devDependencies": {
     "@types/figlet": "^1.5.1",
