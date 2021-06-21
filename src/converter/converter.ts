@@ -18,6 +18,8 @@ import { LoadTemplate } from '../template/template';
 export class Converter {
   private options: IOptions;
 
+  private unquoteRegExp = new RegExp(/"<unquote>[^"]+"/g);
+
   constructor(options: IOptions) {
     this.options = options;
   }
@@ -116,7 +118,10 @@ export class Converter {
    */
   private convertToPostmanCollection(openApiDoc: string): Promise<CollectionDefinition> {
     return new Promise((resolve, reject) => {
-      postmanConverter.convert({ type: 'string', data: openApiDoc }, undefined, (err: Error, conversionResult: PostmanConvertResult) => {
+      postmanConverter.convert({ type: 'string', data: openApiDoc }, {
+        requestParametersResolution: 'Schema',
+        exampleParametersResolution: 'Schema'
+      }, (err: Error, conversionResult: PostmanConvertResult) => {
         if (err) {
           reject(err);
         }
@@ -143,7 +148,9 @@ export class Converter {
     for (const key of Object.keys(jsonObject as Record<string, unknown>)) {
       // change simple keys
       if (!IsObject((jsonObject as Record<string, unknown>)[key] as Record<string, unknown>)) {
-        (jsonObject as Record<string, unknown>)[key] = (parentKey) ? `{{${parentKey}${Capitalize(key)}}}` : `{{${key}}}`;
+        (jsonObject as Record<string, unknown>)[key] = (parentKey) ?
+          `${this.addUnquotePlaceholder((jsonObject as Record<string, unknown>)[key])}{{${parentKey}${Capitalize(key)}}}` :
+          `${this.addUnquotePlaceholder((jsonObject as Record<string, unknown>)[key])}{{${key}}}`;
       }
 
       // deal with objects
@@ -155,15 +162,26 @@ export class Converter {
     return jsonObject;
   }
 
+  private addUnquotePlaceholder(type: string | unknown): string {
+    if (type === '<long>' || type === '<integer>' || type === '<number>' || type === '<boolean>') {
+      return '<unquote>'
+    }
+    return ''
+  }
+
+  private unquoteReplacer(json: string): string | undefined {
+    const c = json.replace(this.unquoteRegExp, (a: string): string => a.replace(/"/g, '').replace('<unquote>', ''))
+    return c
+  }
+
   // UseKeysAsValues changes request body values to keys, so it would be possible
   // to use them as environment variables
   private useKeysAsValues(postmanCollection: Collection): Collection {
     postmanCollection.forEachItem((i: Item) => {
       if (i.request.body && i.request.body.raw) {
-        i.request.body.raw = JSON.stringify(this.changeValuesToKeys(JSON.parse(i.request.body.raw)), null, 2);
+        i.request.body.raw = this.unquoteReplacer(JSON.stringify(this.changeValuesToKeys(JSON.parse(i.request.body.raw)), null, 2));
       }
     });
-
     return postmanCollection;
   }
 

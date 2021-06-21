@@ -1,5 +1,4 @@
 node_modules
-vscode.code-workspace
 lib
 coverage
 .vscode
