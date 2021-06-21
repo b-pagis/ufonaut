@@ -156,49 +156,49 @@ describe('Convert', () => {
   test('Convert - Check endpoints body', async () => {
     const converterOptions: Partial<IOptions> = { openApiDocContent: JSON.stringify(petStoreOpenAPI) };
     const converter: Converter = new Converter(converterOptions as IOptions);
-    const expectedUserBody = {
-      id: '{{id}}',
-      username: '{{username}}',
-      firstName: '{{firstName}}',
-      lastName: '{{lastName}}',
-      email: '{{email}}',
-      password: '{{password}}',
-      phone: '{{phone}}',
-      userStatus: '{{userStatus}}',
-    };
+    const expectedUserBody = `{
+  "id": {{id}},
+  "username": "{{username}}",
+  "firstName": "{{firstName}}",
+  "lastName": "{{lastName}}",
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "phone": "{{phone}}",
+  "userStatus": {{userStatus}}
+}`;
 
-    const expectedPetBody = {
-      complete: '{{complete}}',
-      id: '{{id}}',
-      petId: '{{petId}}',
-      quantity: '{{quantity}}',
-      shipDate: '{{shipDate}}',
-      status: '{{status}}',
-    };
+    const expectedPetBody = `{
+  "id": {{id}},
+  "petId": {{petId}},
+  "quantity": {{quantity}},
+  "shipDate": "{{shipDate}}",
+  "status": "{{status}}",
+  "complete": "{{complete}}"
+}`;
 
-    const expectedStoreBody = {
-      category: {
-        id: '{{categoryId}}',
-        name: '{{categoryName}}',
-      },
-      id: '{{id}}',
-      name: '{{name}}',
-      photoUrls: [
-        '{{photoUrls0}}',
-        '{{photoUrls1}}',
-      ],
-      status: '{{status}}',
-      tags: [
-        {
-          id: '{{tags0Id}}',
-          name: '{{tags0Name}}',
-        },
-        {
-          id: '{{tags1Id}}',
-          name: '{{tags1Name}}',
-        },
-      ],
-    };
+    const expectedStoreBody = `{
+  "name": "{{name}}",
+  "photoUrls": [
+    "{{photoUrls0}}",
+    "{{photoUrls1}}"
+  ],
+  "id": {{id}},
+  "category": {
+    "id": {{categoryId}},
+    "name": "{{categoryName}}"
+  },
+  "tags": [
+    {
+      "id": {{tags0Id}},
+      "name": "{{tags0Name}}"
+    },
+    {
+      "id": {{tags1Id}},
+      "name": "{{tags1Name}}"
+    }
+  ],
+  "status": "{{status}}"
+}`;
 
     await converter.Convert().then((col: Collection) => {
       const createUserBody = col.oneDeep('Create user').request.body?.raw;
@@ -209,9 +209,9 @@ describe('Convert', () => {
       expect(placeOrderForPet).toBeDefined();
       expect(newPetToStore).toBeDefined();
 
-      expect(JSON.parse(createUserBody as string)).toStrictEqual(expectedUserBody);
-      expect(JSON.parse(placeOrderForPet as string)).toStrictEqual(expectedPetBody);
-      expect(JSON.parse(newPetToStore as string)).toStrictEqual(expectedStoreBody);
+      expect(createUserBody).toStrictEqual(expectedUserBody);
+      expect(placeOrderForPet).toStrictEqual(expectedPetBody);
+      expect(newPetToStore).toStrictEqual(expectedStoreBody);
     });
   });
   test('incorrect open api doc', async () => {
@@ -271,8 +271,8 @@ describe('Create sets', () => {
       expect(sets[0].collection.items.idx(0).events.count()).toBe(2);
 
       expect(sets[0].collection.items.idx(0).events.idx(0).script.exec?.toString())
-        .toBe('var requestBody = {,  "id": "{{id}}",,  "petId": "{{petId}}",,  '
-          + '"quantity": "{{quantity}}",,  "shipDate": "{{shipDate}}",,  "status": "{{status}}",'
+        .toBe('var requestBody = {,  "id": {{id}},,  "petId": {{petId}},,  '
+          + '"quantity": {{quantity}},,  "shipDate": "{{shipDate}}",,  "status": "{{status}}",'
           + ',  "complete": "{{complete}}",};,,// post-storeorder.js,const quantity = 100;'
           + ',pm.environment.set(\'quantity\', quantity);,,,pm.environment.set(\'requestBody\', JSON.stringify(requestBody));');
 
