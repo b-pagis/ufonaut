@@ -81,7 +81,7 @@
     "inquirer": "^8.1.0",
     "kleur": "^4.1.4",
     "openapi-to-postmanv2": "^2.7.0",
-    "postman-collection": "^3.6.11",
+    "postman-collection": "^4.0.0",
     "tslib": "^2.3.0"
   },
   "config": {
