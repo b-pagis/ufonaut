@@ -76,7 +76,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "commander": "^7.2.0",
+    "commander": "^8.0.0",
     "figlet": "^1.4.0",
     "inquirer": "^8.1.0",
     "kleur": "^4.1.4",
