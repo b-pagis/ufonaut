@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestHeaders, AxiosResponse } from 'axios';
 import { OutgoingHttpHeaders } from 'http';
 import { GetAuthHeader, GetRemoteFile, IsURL } from './http.util';
 import { AuthHeaderType } from './http.util.model';
@@ -34,7 +34,7 @@ test('Get remote file', async () => {
   const expectedResult = 'result';
   const responsePromise = Promise.resolve({ data: expectedResult } as AxiosResponse);
   const errorResult = Error('something failed');
-  const expectedHeader: OutgoingHttpHeaders = {
+  const expectedHeader: AxiosRequestHeaders = {
     key: 'value',
   };
 

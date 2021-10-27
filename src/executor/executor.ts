@@ -1,6 +1,5 @@
 import { Collection } from 'postman-collection';
-import { OutgoingHttpHeaders } from 'http2';
-import { AxiosResponse } from 'axios';
+import { AxiosRequestHeaders, AxiosResponse } from 'axios';
 import { sep } from 'path';
 import {
   CollectionSet,
@@ -141,7 +140,7 @@ export function ExecuteConvertWrite(executorOptions: IExecutorOptions): void {
     return;
   }
 
-  let httpHeaders: OutgoingHttpHeaders = {};
+  let httpHeaders: AxiosRequestHeaders = {};
 
   if (executorOptions.authHeaderBasicAuthUsername && executorOptions.authHeaderBasicAuthPassword) {
     httpHeaders = GetAuthHeader(executorOptions.authHeaderBasicAuthUsername, executorOptions.authHeaderBasicAuthPassword, '', '', AuthHeaderType.BASIC);
@@ -215,7 +214,7 @@ export function ExecuteCreateWriteSets(executorOptions: IExecutorOptions): void 
     return;
   }
 
-  let httpHeaders: OutgoingHttpHeaders = {};
+  let httpHeaders: AxiosRequestHeaders = {};
 
   if (executorOptions.authHeaderBasicAuthUsername && executorOptions.authHeaderBasicAuthPassword) {
     httpHeaders = GetAuthHeader(executorOptions.authHeaderBasicAuthUsername, executorOptions.authHeaderBasicAuthPassword, '', '', AuthHeaderType.BASIC);
@@ -339,7 +338,7 @@ export function ExecuteListEndpoints(executorOptions: IExecutorOptions): void {
     return;
   }
 
-  let httpHeaders: OutgoingHttpHeaders = {};
+  let httpHeaders: AxiosRequestHeaders = {};
 
   if (executorOptions.authHeaderBasicAuthUsername && executorOptions.authHeaderBasicAuthPassword) {
     httpHeaders = GetAuthHeader(executorOptions.authHeaderBasicAuthUsername, executorOptions.authHeaderBasicAuthPassword, '', '', AuthHeaderType.BASIC);
