@@ -49,6 +49,7 @@
     "build-prod": "npm run clean:lib && tsc -p tsconfig.prod.json",
     "clean:lib": "rm -rf ./lib",
     "clean:all": "rm -rf ./node_modules ./package-lock.json ./lib",
+    "clean:test-cache": "jest --clearCache",
     "refresh": "npm run clean:all && npm i",
     "pack": "npm run build && tar tvf $(npm pack)",
     "prepare-release": "standard-version",
@@ -75,7 +76,7 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "commander": "^8.0.0",
     "figlet": "^1.4.0",
     "inquirer": "^8.1.0",

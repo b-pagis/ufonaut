@@ -1,11 +1,10 @@
-import axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+import axios, { AxiosPromise, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 import { Agent } from 'https';
-import { OutgoingHttpHeaders } from 'http';
 import { URL } from 'url';
 import { AuthHeaderType } from './http.util.model';
 
-export function GetAuthHeader(username: string, password: string, xApiKey: string, token: string, authHeaderType: AuthHeaderType): OutgoingHttpHeaders {
-  const headers: OutgoingHttpHeaders = {};
+export function GetAuthHeader(username: string, password: string, xApiKey: string, token: string, authHeaderType: AuthHeaderType): AxiosRequestHeaders {
+  const headers: AxiosRequestHeaders = {};
 
   if (authHeaderType === AuthHeaderType.BASIC) {
     const buff = Buffer.from(`${username}:${password}`);
@@ -26,7 +25,7 @@ export function GetAuthHeader(username: string, password: string, xApiKey: strin
   return headers;
 }
 
-export function GetRemoteFile(url: string, authHeader: OutgoingHttpHeaders | undefined): AxiosPromise {
+export function GetRemoteFile(url: string, authHeader: AxiosRequestHeaders | undefined): AxiosPromise {
   const options: AxiosRequestConfig = {
     httpsAgent: new Agent({
       rejectUnauthorized: false,
