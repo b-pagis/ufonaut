@@ -2,7 +2,7 @@
   "name": "@b-pagis/ufonaut",
   "author": "b-pagis",
   "license": "ISC",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI for converting open api documentation to postman collection with additional options for integration testing",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
